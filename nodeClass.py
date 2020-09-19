@@ -9,6 +9,7 @@ class Node:
         self.neighbors = []
         self.weights = []
         self.cum_weights = 0
+        self.heuristic = 0
         self.id = str(x)+'-'+str(y)+'-'+str(z)
         self.parent_id = '-999'
 

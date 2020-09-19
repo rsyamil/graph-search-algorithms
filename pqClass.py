@@ -19,11 +19,9 @@ class PriorityQueue:
     #function to replace and heapify
     def replace(self, vertex, priority):
 
-        #print('THIS HAPPENED')
-
         for t_idx, t in enumerate(self.queue):
             if vertex == t[-1]:
-                #print('THIS HAPPENED TOO??')
+                print('HEAPIFY-O(n)')
                 self.queue[t_idx] = (priority, vertex)
                 break
         heapq.heapify(self.queue)

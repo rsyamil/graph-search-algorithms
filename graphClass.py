@@ -90,7 +90,7 @@ class Graph:
     def print_graph(self, graph):
         print('This is the graph: ')
         for key, value in graph.items():
-            print("{} : {} : {}".format(key, value.neighbors, value.weights))
+            print("{} \t {} \t {} \t {}".format(key, value.neighbors, value.weights, value.heuristic))
 
     def print_graph_parents(self, graph):
         print('This is the graph parents: ')

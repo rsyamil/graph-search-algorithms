@@ -3,6 +3,7 @@ import nodeClass
 import graphClass
 import bfsClass
 import ucsClass
+import astarClass
 
 
 if __name__ == '__main__':
@@ -27,18 +28,27 @@ if __name__ == '__main__':
         bfs = bfsClass.BFS(name='BFS', graph=graph, start_id=start_id, end_id=end_id)
         found_flag = bfs.run_bfs()
         #grapher.print_graph_parents(graph)
-        #backtrack and pass output to parser class
         output = grapher.backtrackBFS(graph, start_id, end_id, found_flag)
+
     elif (alg == 'UCS'):
         print('\n Running UCS algorithm \n')
-        ucs = ucsClass.UCS(name='ucs', graph=graph, start_id=start_id, end_id=end_id)
+        ucs = ucsClass.UCS(name='UCS', graph=graph, start_id=start_id, end_id=end_id)
         found_flag = ucs.run_ucs()
         #grapher.print_graph_parents(graph)
         output = grapher.backtrackUCS(graph, start_id, end_id, found_flag)
-    else:
+
+    elif (alg == 'A*'):
         print('\n Running A* algorithm \n')
+        astar = astarClass.ASTAR(name='A*', graph=graph, start_id=start_id, end_id=end_id)
+        astar.update_heuristic(h='Euclidean')
+        #grapher.print_graph(graph)
+        found_flag = astar.run_astar()
+        output = grapher.backtrackUCS(graph, start_id, end_id, found_flag)
 
+    else:
+        print('\n Not implented yet \n')
 
+    #write to output file
     parser.file_writer(output, graph, found_flag)
 
 
