@@ -1,4 +1,5 @@
 import pqClass
+import pickle
 
 class UCS:
     def __init__(self, name=[], graph=0, start_id=0, end_id=0):
@@ -9,6 +10,15 @@ class UCS:
         self.found_flag = False
 
     def run_ucs(self):
+
+        ############
+        #the length of both list is max of number of vertices
+        #each element will not have the same length
+        iter_visited_x = []
+        iter_visited_y = []
+        iter_queued_x = []
+        iter_queued_y = []
+        ############
 
         #frontier works in tandem with pq
         explored = set()
@@ -35,6 +45,19 @@ class UCS:
 
                 if (v == self.end_id):
                     print('\n Found \n')
+
+                    ############
+                    with open("explored_x.txt", "wb") as fp:
+                        pickle.dump(iter_visited_x, fp)
+                    with open("explored_y.txt", "wb") as fp:
+                        pickle.dump(iter_visited_y, fp)
+
+                    with open("queued_x.txt", "wb") as fp:
+                        pickle.dump(iter_queued_x, fp)
+                    with open("queued_y.txt", "wb") as fp:
+                        pickle.dump(iter_queued_y, fp)
+                    ############
+
                     self.found_flag = True
                     return self.found_flag
 
@@ -43,6 +66,10 @@ class UCS:
                 #print(neighbours, weights)
                 
                 for n, w in zip(neighbours, weights):
+
+                    #check feasibility of movements
+                    if n not in self.graph:
+                        continue
 
                     if n not in explored:
 
@@ -67,4 +94,25 @@ class UCS:
                                 pq.replace(n, cum_w)
                                 (self.graph[n]).cum_weights = cum_w
                 explored.add(v)
+
+                ############
+                temp_x = []
+                temp_y = []
+                for e in explored:
+                    temp_x.append((self.graph[e]).x)
+                    temp_y.append((self.graph[e]).y)
+                iter_visited_x.append(temp_x)
+                iter_visited_y.append(temp_y)
+                ############
+
+                ############
+                temp_x = []
+                temp_y = []
+                for e in frontier:
+                    temp_x.append((self.graph[e]).x)
+                    temp_y.append((self.graph[e]).y)
+                iter_queued_x.append(temp_x)
+                iter_queued_y.append(temp_y)
+                ############
+
         return self.found_flag

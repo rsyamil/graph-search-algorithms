@@ -2,6 +2,7 @@ import parserClass
 import nodeClass
 import graphClass
 import bfsClass
+import dfsClass
 import ucsClass
 import astarClass
 
@@ -27,6 +28,13 @@ if __name__ == '__main__':
         print('\n Running BFS algorithm \n')
         bfs = bfsClass.BFS(name='BFS', graph=graph, start_id=start_id, end_id=end_id)
         found_flag = bfs.run_bfs()
+        #grapher.print_graph_parents(graph)
+        output = grapher.backtrackBFS(graph, start_id, end_id, found_flag)
+
+    elif (alg == 'DFS'):
+        print('\n Running DFS algorithm \n')
+        dfs = dfsClass.DFS(name='DFS', graph=graph, start_id=start_id, end_id=end_id)
+        found_flag = dfs.run_dfs()
         #grapher.print_graph_parents(graph)
         output = grapher.backtrackBFS(graph, start_id, end_id, found_flag)
 

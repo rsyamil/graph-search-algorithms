@@ -1,7 +1,7 @@
 from collections import deque
 import pickle
 
-class BFS:
+class DFS:
     def __init__(self, name=[], graph=0, start_id=0, end_id=0):
         self.name = name
         self.graph = graph
@@ -9,7 +9,7 @@ class BFS:
         self.end_id = end_id
         self.found_flag = False
 
-    def run_bfs(self):
+    def run_dfs(self):
 
         ############
         #the length of both list is max of number of vertices
@@ -29,28 +29,8 @@ class BFS:
         
         while queue:
 
-            ############
-            temp_x = []
-            temp_y = []
-            for e in explored:
-                temp_x.append((self.graph[e]).x)
-                temp_y.append((self.graph[e]).y)
-            iter_visited_x.append(temp_x)
-            iter_visited_y.append(temp_y)
-            ############
-
-            ############
-            temp_x = []
-            temp_y = []
-            for e in queue:
-                temp_x.append((self.graph[e]).x)
-                temp_y.append((self.graph[e]).y)
-            iter_queued_x.append(temp_x)
-            iter_queued_y.append(temp_y)
-            ############
-            
             #print("Current queue : ", queue)
-            v = queue.popleft()
+            v = queue.pop()
             #print("Current vertex : ", v)
             
             if v not in explored:
@@ -69,6 +49,26 @@ class BFS:
                         queue.append(n)
                 
                 explored.add(v)
+
+                ############
+                temp_x = []
+                temp_y = []
+                for e in explored:
+                    temp_x.append((self.graph[e]).x)
+                    temp_y.append((self.graph[e]).y)
+                iter_visited_x.append(temp_x)
+                iter_visited_y.append(temp_y)
+                ############
+
+                ############
+                temp_x = []
+                temp_y = []
+                for e in queue:
+                    temp_x.append((self.graph[e]).x)
+                    temp_y.append((self.graph[e]).y)
+                iter_queued_x.append(temp_x)
+                iter_queued_y.append(temp_y)
+                ############
                 
                 if (v == self.end_id):
                     print('\n Found \n')
